@@ -15,7 +15,7 @@ const SpaceBackgroundDemo = ({ children }) => {
       showAsteroidBelt={true}
       starsCount={isDark ? 5000 : 3000}
       enableControls={true}
-      backgroundColor={isDark ? '#0a0a0f' : '#f0f8ff'}
+      backgroundColor='#0a0a0f'
     >
       {children}
     </SpaceBackground>

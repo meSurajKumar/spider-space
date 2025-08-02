@@ -72,9 +72,9 @@ const ChatWindow = () => {
   }, [messages, loading])
 
   return (
-    <div className="flex-1 overflow-hidden">
-      <div className="h-full overflow-y-auto chat-scroll px-4 py-6">
-        <div className="max-w-4xl mx-auto">
+    <div className="flex-1 overflow-hidden bg-transparent">
+      <div className="h-full overflow-y-auto chat-scroll px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-4xl mx-auto space-y-4">
           {messages.length === 0 ? null : (
             <AnimatePresence>
               {messages.map((message, index) => (

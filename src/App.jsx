@@ -58,13 +58,13 @@ const AppContent = () => {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative min-h-screen flex flex-col bg-gray-900">
       {/* <ThemeToggle /> */}
       <ErrorNotification error={error} onDismiss={dismissError} />
 
-      <div className="relative z-10 flex flex-col flex-grow bg-white/20 dark:bg-gray-900/20 backdrop-blur-sm">
-        <header className="border-b border-gray-200/30 dark:border-gray-700/30 bg-white/10 dark:bg-gray-900/10">
-          <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="relative z-10 flex flex-col flex-grow bg-gray-900/30 backdrop-blur-sm">
+        <header className="border-b border-gray-700/50 bg-gray-900/20 backdrop-blur-md">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,13 +77,13 @@ const AppContent = () => {
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white">RAG AI Chat</h1>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Intelligent document search & analysis</p>
+                <h1 className="text-xl font-bold text-white">RAG AI Chat</h1>
+                <p className="text-sm text-gray-300">Intelligent document search & analysis</p>
               </div>
             </div>
 
             {hasMessages && (
-              <button onClick={handleClearChat} disabled={!canClear} className="btn-secondary text-sm">
+              <button onClick={handleClearChat} disabled={!canClear} className="btn-secondary text-sm hidden sm:block">
                 Clear Chat
               </button>
             )}

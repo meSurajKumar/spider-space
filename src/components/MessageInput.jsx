@@ -34,9 +34,9 @@ const MessageInput = () => {
   }, [input])
 
   return (
-    <div className="sticky bottom-0 bg-white/10 dark:bg-gray-900/10 border-t border-gray-200/30 dark:border-gray-700/30 p-4">
+    <div className="sticky bottom-0 bg-gray-900/20 border-t border-gray-700/50 backdrop-blur-md p-4 sm:p-6">
       <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
-        <div className="flex items-end space-x-3">
+        <div className="flex items-end space-x-2 sm:space-x-3">
           <div className="flex-1 relative">
             <textarea
               ref={textareaRef}
@@ -44,19 +44,19 @@ const MessageInput = () => {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Ask me anything about your documents..."
-              className="message-input min-h-[48px] max-h-32 overflow-y-auto"
+              className="message-input min-h-[48px] max-h-32 overflow-y-auto text-sm sm:text-base"
               disabled={loading}
               rows={1}
             />
             {input.length > 0 && (
-              <div className="absolute bottom-2 right-3 text-xs text-gray-400">{input.length}/2000</div>
+              <div className="absolute bottom-2 right-3 text-xs text-gray-500">{input.length}/2000</div>
             )}
           </div>
 
           <button
             type="submit"
             disabled={!input.trim() || loading}
-            className="btn-primary flex items-center justify-center min-w-[48px] h-12 rounded-full"
+            className="btn-primary flex items-center justify-center min-w-[48px] h-12 shrink-0"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -73,9 +73,9 @@ const MessageInput = () => {
           </button>
         </div>
 
-        <div className="flex items-center justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
+        <div className="flex items-center justify-between mt-2 text-xs text-gray-400">
           <span>Press Enter to send, Shift+Enter for new line</span>
-          <span className="hidden sm:block">Powered by RAG AI</span>
+          <span className="hidden md:block">Powered by RAG AI</span>
         </div>
       </form>
     </div>

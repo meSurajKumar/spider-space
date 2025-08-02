@@ -49,7 +49,9 @@
   }
 
   body {
-    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300;
+    @apply bg-gray-900 text-white transition-colors duration-300;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 
   * {
@@ -59,33 +61,34 @@
 
 @layer components {
   .chat-bubble {
-    @apply max-w-xs lg:max-w-md px-4 py-2 rounded-2xl shadow-sm;
+    @apply max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl px-4 py-3 rounded-2xl shadow-lg;
   }
 
   .chat-bubble-user {
-    @apply bg-blue-500 text-white ml-auto rounded-br-md;
+    @apply bg-blue-600 text-white ml-auto rounded-br-md shadow-md;
   }
 
   .chat-bubble-bot {
-    @apply bg-white/80 dark:bg-gray-800/80 border border-gray-200/50 dark:border-gray-700/50 mr-auto rounded-bl-md backdrop-blur-sm;
+    @apply bg-gray-800/90 border border-gray-600/50 text-white mr-auto rounded-bl-md backdrop-blur-sm shadow-md;
   }
 
   .message-input {
-    @apply w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-full 
-           bg-white/80 dark:bg-gray-800/80 text-gray-900 dark:text-white backdrop-blur-sm
+    @apply w-full px-4 py-3 border border-gray-600/70 rounded-2xl 
+           bg-gray-800/90 text-white backdrop-blur-sm
            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-           placeholder-gray-500 dark:placeholder-gray-400 resize-none;
+           placeholder-gray-400 resize-none shadow-lg;
   }
 
   .btn-primary {
-    @apply bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full 
-           transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-2xl 
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed
+           shadow-lg hover:shadow-xl;
   }
 
   .btn-secondary {
-    @apply bg-gray-200/80 hover:bg-gray-300/80 dark:bg-gray-700/80 dark:hover:bg-gray-600/80 
-           text-gray-700 dark:text-gray-300 px-4 py-2 rounded-full 
-           transition-colors duration-200 backdrop-blur-sm;
+    @apply bg-gray-700/80 hover:bg-gray-600/80 
+           text-gray-200 px-4 py-2 rounded-2xl 
+           transition-all duration-200 backdrop-blur-sm shadow-md;
   }
 }
 
