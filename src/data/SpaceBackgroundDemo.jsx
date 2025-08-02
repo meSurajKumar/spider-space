@@ -8,12 +8,12 @@ const SpaceBackgroundDemo = ({ children }) => {
 
   return (
     <SpaceBackground
-      isDark={isDark}
+      isDark={true}
       autoRotate={true}
       autoRotateSpeed={0.3}
       systemRotationSpeed={0.0005}
       showAsteroidBelt={true}
-      starsCount={isDark ? 5000 : 3000}
+      starsCount={5000}
       enableControls={true}
       backgroundColor='#0a0a0f'
     >

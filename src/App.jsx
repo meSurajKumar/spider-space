@@ -58,12 +58,12 @@ const AppContent = () => {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-gray-900">
-      {/* <ThemeToggle /> */}
+    <div className="min-h-screen flex flex-col">
+      <ThemeToggle />
       <ErrorNotification error={error} onDismiss={dismissError} />
 
-      <div className="relative z-10 flex flex-col flex-grow bg-gray-900/30 backdrop-blur-sm">
-        <header className="border-b border-gray-700/50 bg-gray-900/20 backdrop-blur-md">
+      <div className="flex flex-col flex-grow">
+        <header className="border-b border-gray-700/50 bg-gray-900/80 backdrop-blur-md">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">

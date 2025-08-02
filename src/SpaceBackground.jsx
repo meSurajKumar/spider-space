@@ -191,11 +191,34 @@ const SpaceBackground = ({
   children
 }) => {
   return (
-    <div 
-      className={`fixed inset-0 -z-10 ${className}`} 
-      style={{ backgroundColor, ...style }}
-    >
-      <Canvas dpr={[1, 2]} camera={{ position: [0, 15, 25], fov: 60 }}>
+    <div className="relative min-h-screen w-full">
+      <div 
+        className={`fixed inset-0 w-full h-full -z-10 ${className}`} 
+        style={{ backgroundColor, ...style }}
+      >
+        <Canvas 
+          dpr={[1, 2]} 
+          camera={{ position: [0, 15, 25], fov: 60 }}
+          style={{ width: '100%', height: '100%' }}
+        >
+          <Scene 
+            isDark={isDark}
+            planetsConfig={planetsConfig}
+            showAsteroidBelt={showAsteroidBelt}
+            systemRotationSpeed={systemRotationSpeed}
+            autoRotate={autoRotate}
+            autoRotateSpeed={autoRotateSpeed}
+            enableControls={enableControls}
+            starsCount={starsCount}
+          />
+        </Canvas>
+      </div>
+      <div className="relative z-10 min-h-screen w-full">
+        {children}
+      </div>
+    </div>
+  )
+}
         <Scene 
           isDark={isDark}
           planetsConfig={planetsConfig}

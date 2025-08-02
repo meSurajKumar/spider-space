@@ -34,7 +34,7 @@ const MessageInput = () => {
   }, [input])
 
   return (
-    <div className="sticky bottom-0 bg-gray-900/20 border-t border-gray-700/50 backdrop-blur-md p-4 sm:p-6">
+    <div className="sticky bottom-0 bg-gray-900/90 border-t border-gray-700/50 backdrop-blur-md p-4 sm:p-6 z-20">
       <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
         <div className="flex items-end space-x-2 sm:space-x-3">
           <div className="flex-1 relative">
@@ -44,7 +44,10 @@ const MessageInput = () => {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Ask me anything about your documents..."
-              className="message-input min-h-[48px] max-h-32 overflow-y-auto text-sm sm:text-base"
+              className="w-full px-4 py-3 border border-gray-600/70 rounded-2xl 
+                         bg-gray-800/95 text-white backdrop-blur-sm
+                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                         placeholder-gray-400 resize-none shadow-lg min-h-[48px] max-h-32 overflow-y-auto text-sm sm:text-base"
               disabled={loading}
               rows={1}
             />
@@ -56,7 +59,9 @@ const MessageInput = () => {
           <button
             type="submit"
             disabled={!input.trim() || loading}
-            className="btn-primary flex items-center justify-center min-w-[48px] h-12 shrink-0"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-2xl 
+                       transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed
+                       shadow-lg hover:shadow-xl flex items-center justify-center min-w-[48px] h-12 shrink-0"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
