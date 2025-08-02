@@ -219,20 +219,5 @@ const SpaceBackground = ({
     </div>
   )
 }
-        <Scene 
-          isDark={isDark}
-          planetsConfig={planetsConfig}
-          showAsteroidBelt={showAsteroidBelt}
-          systemRotationSpeed={systemRotationSpeed}
-          autoRotate={autoRotate}
-          autoRotateSpeed={autoRotateSpeed}
-          enableControls={enableControls}
-          starsCount={starsCount}
-        />
-      </Canvas>
-      {children}
-    </div>
-  )
-}
 
 export default SpaceBackground
