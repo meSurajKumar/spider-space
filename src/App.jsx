@@ -63,11 +63,11 @@ const AppContent = () => {
       <ErrorNotification error={error} onDismiss={dismissError} />
 
       <div className="flex flex-col flex-grow">
-        <header className="border-b border-gray-700/50 bg-gray-900/80 backdrop-blur-md">
+        <header className="border-b border-gray-700/50 bg-gradient-to-b from-gray-900/95 to-gray-800/90 backdrop-blur-md shadow-md">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -77,8 +77,8 @@ const AppContent = () => {
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white">RAG AI Chat</h1>
-                <p className="text-sm text-gray-300">Intelligent document search & analysis</p>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 text-transparent bg-clip-text drop-shadow-sm">RAG AI Chat</h1>
+                <p className="text-sm text-blue-200">Intelligent document search & analysis</p>
               </div>
             </div>
 
