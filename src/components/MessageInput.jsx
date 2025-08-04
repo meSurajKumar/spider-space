@@ -4,22 +4,32 @@ import React from "react"
 import { useState, useRef, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { sendQuery, selectLoading } from "../app/chatSlice"
+import { selectIsWebsearchEnabled } from "../app/websearchSlice"
 
 const MessageInput = () => {
   const [input, setInput] = useState("")
   const dispatch = useDispatch()
   const loading = useSelector(selectLoading)
+  const isWebsearchEnabled = useSelector(selectIsWebsearchEnabled)
   const textareaRef = useRef(null)
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (input.trim() && !loading) {
-      dispatch(sendQuery(input.trim()))
+      // The query parameter is passed to the sendQuery thunk
+      // The thunk will handle adding websearch and chat history
+      const trimmedInput = input.trim()
+      console.log('Submitting query:', trimmedInput)
+      
+      // Dispatch the query
+      dispatch(sendQuery(trimmedInput))
+      
+      // Clear the input field
       setInput("")
     }
   }
 
-  const handleKeyPress = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       handleSubmit(e)
@@ -42,7 +52,7 @@ const MessageInput = () => {
               ref={textareaRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               placeholder="Ask me anything about your documents..."
               className="w-full px-5 py-3 border border-gray-600/70 rounded-2xl 
                          bg-gray-800/95 text-white backdrop-blur-sm

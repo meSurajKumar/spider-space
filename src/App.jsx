@@ -8,6 +8,7 @@ import { setTheme, selectIsDark } from "./app/themeSlice"
 import ChatWindow from "./components/ChatWindow"
 import MessageInput from "./components/MessageInput"
 import ThemeToggle from "./components/ThemeToggle"
+import WebSearchToggle from "./components/WebSearchToggle"
 import SpaceScene from "./components/SpaceScene"
 import SpaceBackgroundDemo from "./data/SpaceBackgroundDemo"
 import { useChat } from "./hooks/useChatHooks"
@@ -81,12 +82,17 @@ const AppContent = () => {
                 <p className="text-sm text-blue-200">Intelligent document search & analysis</p>
               </div>
             </div>
+            
+            <div className="flex items-center space-x-3">
+              <WebSearchToggle />
+              {hasMessages && (
+                <button onClick={handleClearChat} disabled={!canClear} className="btn-secondary text-sm hidden sm:block">
+                  Clear Chat
+                </button>
+              )}
+            </div>
 
-            {hasMessages && (
-              <button onClick={handleClearChat} disabled={!canClear} className="btn-secondary text-sm hidden sm:block">
-                Clear Chat
-              </button>
-            )}
+
           </div>
         </header>
 
