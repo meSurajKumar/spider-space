@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "description": "Reusable 3D Space Background Component for React",
   "main": "src/SpaceBackground.jsx",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -14,6 +13,7 @@
     "@react-three/drei": "^9.88.13",
     "@react-three/fiber": "^8.15.11",
     "@reduxjs/toolkit": "^2.8.2",
+    "@tailwindcss/postcss": "^4.1.11",
     "axios": "^1.11.0",
     "framer-motion": "^12.23.12",
     "react": ">=16.8.0",
