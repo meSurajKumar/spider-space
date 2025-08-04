@@ -59,11 +59,11 @@ const AppContent = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col h-screen overflow-hidden">
       <ThemeToggle />
       <ErrorNotification error={error} onDismiss={dismissError} />
 
-      <div className="flex flex-col flex-grow">
+      <div className="chat-container">
         <header className="border-b border-gray-700/50 bg-gradient-to-b from-gray-900/95 to-gray-800/90 backdrop-blur-md shadow-md">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -91,13 +91,18 @@ const AppContent = () => {
                 </button>
               )}
             </div>
-
-
           </div>
         </header>
 
-        <ChatWindow />
-        <MessageInput />
+        {/* Scrollable message container */}
+        <div className="messages-container">
+          <ChatWindow />
+        </div>
+        
+        {/* Fixed input area */}
+        <div className="input-container">
+          <MessageInput />
+        </div>
       </div>
     </div>
   )

@@ -44,7 +44,7 @@ const MessageInput = () => {
   }, [input])
 
   return (
-    <div className="sticky bottom-0 border-t border-gray-700/50 backdrop-blur-md p-4 sm:p-6 z-20" style={{ backgroundColor: 'hsla(var(--background), 0.9)' }}>
+    <div className="border-t border-gray-700/50 backdrop-blur-md p-4 sm:p-6 z-20 w-full" style={{ backgroundColor: 'hsla(var(--background), 0.95)' }}>
       <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
         <div className="flex items-end space-x-2 sm:space-x-3">
           <div className="flex-1 relative">
@@ -61,6 +61,8 @@ const MessageInput = () => {
                          transition-all duration-200 hover:border-gray-500/80"
               disabled={loading}
               rows={1}
+              tabIndex={0}
+              aria-label="Message input"
             />
             {input.length > 0 && (
               <div className="absolute bottom-2 right-3 text-xs text-gray-500">{input.length}/2000</div>

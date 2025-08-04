@@ -14,15 +14,22 @@ const ChatWindow = () => {
   const loading = useSelector(selectLoading)
   const thinking = useSelector(selectThinking)
   const messagesEndRef = useRef(null)
+  const messagesContainerRef = useRef(null)
 
+  // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }
   }, [messages, loading, thinking])
 
   return (
-    <div className="flex-1 overflow-hidden bg-transparent">
-      <div className="h-full overflow-y-auto chat-scroll px-4 sm:px-6 lg:px-8 py-6">
-        <div className="max-w-4xl mx-auto space-y-4">
+    <div className="h-full bg-transparent">
+      <div 
+        ref={messagesContainerRef}
+        className="h-full chat-scroll px-4 sm:px-6 lg:px-8 py-6"
+      >
+        <div className="max-w-4xl mx-auto space-y-4 pb-4">
           {messages.length === 0 ? (
             <WelcomeMessage />
           ) : (

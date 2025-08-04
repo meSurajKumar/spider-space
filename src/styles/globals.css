@@ -57,7 +57,10 @@
     color: hsl(var(--foreground));
     transition: colors 300ms;
     min-height: 100vh;
-    overflow-x: hidden;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   * {
@@ -112,6 +115,28 @@
 
 .chat-scroll::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-400/80 dark:bg-gray-500/80;
+}
+
+/* Fixed layout styles */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+.input-container {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
 }
 
 .loading-dots {
