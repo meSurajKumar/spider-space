@@ -1,10 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { sendQuery as apiSendQuery, clearSession as apiClearSession } from "../api/queryService"
 
-export const sendQuery = createAsyncThunk("chat/sendQuery", async (query, { rejectWithValue }) => {
+export const sendQuery = createAsyncThunk("chat/sendQuery", async ({ query, websearch, chatHistoryData }, { rejectWithValue }) => {
   try {
-    const response = await apiSendQuery(query)
-    return { query, response }
+    const response = await apiSendQuery({ 
+      question: query, 
+      websearch, 
+      chatHistoryData 
+    })
+    return { query, response, websearch }
   } catch (error) {
     return rejectWithValue(error.message)
   }
@@ -24,6 +28,9 @@ const initialState = {
   loading: false,
   error: null,
   sessionId: null,
+  websearchEnabled: false,
+  hasUserSentMessage: false,
+  streamingMessage: null,
 }
 
 const chatSlice = createSlice({
@@ -40,6 +47,18 @@ const chatSlice = createSlice({
         ...action.payload,
       })
     },
+    toggleWebsearch: (state) => {
+      state.websearchEnabled = !state.websearchEnabled
+    },
+    setUserSentMessage: (state) => {
+      state.hasUserSentMessage = true
+    },
+    setStreamingMessage: (state, action) => {
+      state.streamingMessage = action.payload
+    },
+    clearStreamingMessage: (state) => {
+      state.streamingMessage = null
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -49,12 +68,14 @@ const chatSlice = createSlice({
       })
       .addCase(sendQuery.fulfilled, (state, action) => {
         state.loading = false
-        const { query, response } = action.payload
+        const { query, response, websearch } = action.payload
+        state.hasUserSentMessage = true
 
         state.messages.push({
           id: Date.now(),
           type: "user",
           content: query,
+          websearch,
           timestamp: new Date().toISOString(),
         })
 
@@ -62,9 +83,12 @@ const chatSlice = createSlice({
           id: Date.now() + 1,
           type: "bot",
           content: response.answer || response.message || "No response received",
+          imageUrl: response.data?.imageUrl,
+          otherUrl: response.data?.otherUrl,
           sources: response.sources || [],
           images: response.images || [],
           timestamp: new Date().toISOString(),
+          streaming: true,
         })
       })
       .addCase(sendQuery.rejected, (state, action) => {
@@ -79,6 +103,8 @@ const chatSlice = createSlice({
         state.messages = []
         state.error = null
         state.sessionId = null
+        state.hasUserSentMessage = false
+        state.streamingMessage = null
       })
       .addCase(clearSession.rejected, (state, action) => {
         state.loading = false
@@ -87,10 +113,20 @@ const chatSlice = createSlice({
   },
 })
 
-export const { clearError, addMessage } = chatSlice.actions
+export const { 
+  clearError, 
+  addMessage, 
+  toggleWebsearch, 
+  setUserSentMessage, 
+  setStreamingMessage, 
+  clearStreamingMessage 
+} = chatSlice.actions
 
 export const selectMessages = (state) => state.chat.messages
 export const selectLoading = (state) => state.chat.loading
 export const selectError = (state) => state.chat.error
+export const selectWebsearchEnabled = (state) => state.chat.websearchEnabled
+export const selectHasUserSentMessage = (state) => state.chat.hasUserSentMessage
+export const selectStreamingMessage = (state) => state.chat.streamingMessage
 
 export default chatSlice.reducer

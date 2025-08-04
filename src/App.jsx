@@ -77,8 +77,8 @@ const AppContent = () => {
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 text-transparent bg-clip-text drop-shadow-sm">RAG AI Chat</h1>
-                <p className="text-sm text-blue-200">Intelligent document search & analysis</p>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-purple-300 to-blue-300 text-transparent bg-clip-text drop-shadow-sm">Galactus-1.0</h1>
+                <p className="text-sm text-purple-200">Cosmic Intelligence & Universal Knowledge</p>
               </div>
             </div>
 

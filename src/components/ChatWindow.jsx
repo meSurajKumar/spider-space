@@ -4,11 +4,27 @@ import React from "react"
 import { useEffect, useRef } from "react"
 import { useSelector } from "react-redux"
 import { motion, AnimatePresence } from "framer-motion"
-import { selectMessages, selectLoading } from "../app/chatSlice"
-import LoadingIndicator from "./LoadingIndicator"
+import { selectMessages, selectLoading, selectHasUserSentMessage } from "../app/chatSlice"
+import StreamingMessage from "./StreamingMessage"
+import GalactusWelcome from "./GalactusWelcome"
+import ThinkingIndicator from "./ThinkingIndicator"
 
 const ChatMessage = ({ message, index }) => {
   const isUser = message.type === "user"
+
+  // If it's a bot message with streaming enabled, use StreamingMessage component
+  if (!isUser && message.streaming) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: index * 0.1 }}
+        className="flex justify-start mb-4"
+      >
+        <StreamingMessage message={message} />
+      </motion.div>
+    )
+  }
 
   return (
     <motion.div
@@ -19,6 +35,12 @@ const ChatMessage = ({ message, index }) => {
     >
       <div className={`chat-bubble ${isUser ? "chat-bubble-user" : "chat-bubble-bot"}`}>
         <div className="text-sm leading-relaxed">{message.content}</div>
+
+        {message.websearch && isUser && (
+          <div className="mt-1 text-xs text-blue-200 opacity-75">
+            🌐 Web search enabled
+          </div>
+        )}
 
         {message.images && message.images.length > 0 && (
           <div className="mt-3 grid grid-cols-2 gap-2">
@@ -65,6 +87,7 @@ const ChatMessage = ({ message, index }) => {
 const ChatWindow = () => {
   const messages = useSelector(selectMessages)
   const loading = useSelector(selectLoading)
+  const hasUserSentMessage = useSelector(selectHasUserSentMessage)
   const messagesEndRef = useRef(null)
 
   useEffect(() => {
@@ -75,7 +98,9 @@ const ChatWindow = () => {
     <div className="flex-1 overflow-hidden bg-transparent">
       <div className="h-full overflow-y-auto chat-scroll px-4 sm:px-6 lg:px-8 py-6">
         <div className="max-w-4xl mx-auto space-y-4">
-          {messages.length === 0 ? null : (
+          {!hasUserSentMessage && <GalactusWelcome />}
+          
+          {messages.length > 0 && (
             <AnimatePresence>
               {messages.map((message, index) => (
                 <ChatMessage key={message.id} message={message} index={index} />
@@ -84,13 +109,7 @@ const ChatWindow = () => {
           )}
 
           {loading && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="flex justify-start mb-4"
-            >
-              <LoadingIndicator type="skeleton" />
-            </motion.div>
+            <ThinkingIndicator />
           )}
 
           <div ref={messagesEndRef} />

@@ -2,24 +2,23 @@
 
 import React from "react"
 import { useState, useRef, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { sendQuery, selectLoading } from "../app/chatSlice"
+import { useChat } from "../hooks/useChatHooks"
+import WebSearchToggle from "./WebSearchToggle"
 
 const MessageInput = () => {
   const [input, setInput] = useState("")
-  const dispatch = useDispatch()
-  const loading = useSelector(selectLoading)
+  const { sendQuery, loading, websearchEnabled, toggleWebSearch, canSend } = useChat()
   const textareaRef = useRef(null)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (input.trim() && !loading) {
-      dispatch(sendQuery(input.trim()))
+    if (input.trim() && canSend) {
+      sendQuery(input.trim())
       setInput("")
     }
   }
 
-  const handleKeyPress = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       handleSubmit(e)
@@ -36,14 +35,25 @@ const MessageInput = () => {
   return (
     <div className="sticky bottom-0 border-t border-gray-700/50 backdrop-blur-md p-4 sm:p-6 z-20" style={{ backgroundColor: 'hsla(var(--background), 0.9)' }}>
       <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
+        <div className="flex items-center justify-between mb-3">
+          <WebSearchToggle 
+            enabled={websearchEnabled}
+            onToggle={toggleWebSearch}
+            disabled={loading}
+          />
+          <div className="text-xs text-gray-400">
+            Galactus-1.0 • Cosmic Intelligence
+          </div>
+        </div>
+        
         <div className="flex items-end space-x-2 sm:space-x-3">
           <div className="flex-1 relative">
             <textarea
               ref={textareaRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Ask me anything about your documents..."
+              onKeyDown={handleKeyDown}
+              placeholder="Ask Galactus anything about the cosmos..."
               className="w-full px-5 py-3 border border-gray-600/70 rounded-2xl 
                          bg-gray-800/95 text-white backdrop-blur-sm
                          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
@@ -59,11 +69,11 @@ const MessageInput = () => {
 
           <button
             type="submit"
-            disabled={!input.trim() || loading}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-2xl 
+            disabled={!input.trim() || !canSend}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-2xl 
                        transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed
                        shadow-lg hover:shadow-xl flex items-center justify-center min-w-[52px] h-[52px] shrink-0
-                       border border-blue-500/50 hover:border-blue-400/70 hover:scale-105"
+                       border border-purple-500/50 hover:border-purple-400/70 hover:scale-105"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -82,7 +92,7 @@ const MessageInput = () => {
 
         <div className="flex items-center justify-between mt-2 text-xs text-gray-400">
           <span>Press Enter to send, Shift+Enter for new line</span>
-          <span className="hidden md:block">Powered by RAG AI</span>
+          <span className="hidden md:block">Powered by Galactus-1.0</span>
         </div>
       </form>
     </div>

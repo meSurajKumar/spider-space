@@ -1,8 +1,8 @@
 import api from "./apiService"
 
-export const sendQuery = async (query) => {
+export const sendQuery = async (payload) => {
   try {
-    const response = await api.post("/api/query", { query })
+    const response = await api.post("/api/query", payload)
     return response.data
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to send query")
