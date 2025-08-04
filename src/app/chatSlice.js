@@ -158,14 +158,14 @@ const chatSlice = createSlice({
         console.log('Final content to display:', content)
         
         // Check if a bot message with this content already exists to prevent duplicates
-        const botMessageExists = state.messages.some(
-          message => message.type === "bot" && message.content === content
-        )
+        // const botMessageExists = state.messages.some(
+        //   message => message.type === "bot" && message.content === content
+        // )
         
-        console.log('Current messages before adding bot response:', state.messages)
-        console.log('Bot message exists?', botMessageExists)
+        // console.log('Current messages before adding bot response:', state.messages)
+        // console.log('Bot message exists?', botMessageExists)
         
-        if (!botMessageExists && content !== "No response received") {
+        // if (!botMessageExists && content !== "No response received") {
           const newBotMessage = {
             id: Date.now() + 1,
             type: "bot",
@@ -179,9 +179,9 @@ const chatSlice = createSlice({
           
           console.log('Adding new bot message:', newBotMessage)
           state.messages.push(newBotMessage)
-        } else {
-          console.log('Skipping bot message addition because it already exists or has no content')
-        }
+        // } else {
+        //   console.log('Skipping bot message addition because it already exists or has no content')
+        // }
       })
       .addCase(sendQuery.rejected, (state, action) => {
         state.loading = false

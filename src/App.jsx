@@ -60,7 +60,7 @@ const AppContent = () => {
 
   return (
     <div className="min-h-screen flex flex-col h-screen overflow-hidden">
-      <ThemeToggle />
+      {hasMessages && <ThemeToggle />}
       <ErrorNotification error={error} onDismiss={dismissError} />
 
       <div className="chat-container">
@@ -85,11 +85,11 @@ const AppContent = () => {
             
             <div className="flex items-center space-x-3">
               <WebSearchToggle />
-              {hasMessages && (
+              {/* {hasMessages && (
                 <button onClick={handleClearChat} disabled={!canClear} className="btn-secondary text-sm hidden sm:block">
                   Clear Chat
                 </button>
-              )}
+              )} */}
             </div>
           </div>
         </header>
