@@ -2,10 +2,10 @@ import axios from "axios"
 
 const getApiUrl = () => {
   try {
-    return import.meta.env?.VITE_API_URL || "http://localhost:8000"
+    return import.meta.env?.VITE_API_URL || "http://localhost:3000"
   } catch (error) {
     console.warn("Could not access environment variables, using default API URL")
-    return "http://localhost:8000"
+    return "http://localhost:3000"
   }
 }
 

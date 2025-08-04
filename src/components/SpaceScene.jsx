@@ -19,8 +19,8 @@ const Planet = ({ position, size, color, rotationSpeed = 0.01, emissive = '#0000
   return (
     <mesh ref={meshRef} position={position}>
       <sphereGeometry args={[size, 32, 32]} />
-      <meshStandardMaterial 
-        color={color} 
+      <meshStandardMaterial
+        color={color}
         emissive={emissive}
         roughness={roughness}
         metalness={metalness}
@@ -50,7 +50,7 @@ const OrbitPath = ({ radius, color = '#333333', opacity = 0.3 }) => {
 // Asteroid belt
 const AsteroidBelt = ({ count = 200, innerRadius = 5, outerRadius = 7, color = '#777777' }) => {
   const asteroids = []
-  
+
   for (let i = 0; i < count; i++) {
     const angle = Math.random() * Math.PI * 2
     const radius = innerRadius + Math.random() * (outerRadius - innerRadius)
@@ -58,7 +58,7 @@ const AsteroidBelt = ({ count = 200, innerRadius = 5, outerRadius = 7, color = '
     const z = Math.sin(angle) * radius
     const y = (Math.random() - 0.5) * 0.5 // Slight vertical variation
     const size = 0.05 + Math.random() * 0.1
-    
+
     asteroids.push(
       <mesh key={i} position={[x, y, z]} rotation={[Math.random(), Math.random(), Math.random()]}>
         <dodecahedronGeometry args={[size, 0]} />
@@ -66,7 +66,7 @@ const AsteroidBelt = ({ count = 200, innerRadius = 5, outerRadius = 7, color = '
       </mesh>
     )
   }
-  
+
   return <group>{asteroids}</group>
 }
 
@@ -74,7 +74,7 @@ const AsteroidBelt = ({ count = 200, innerRadius = 5, outerRadius = 7, color = '
 const Scene = () => {
   const isDark = useSelector(selectIsDark)
   const { camera } = useThree()
-  
+
   useEffect(() => {
     camera.position.set(0, 15, 25)
   }, [])
@@ -83,36 +83,57 @@ const Scene = () => {
     <>
       <ambientLight intensity={isDark ? 0.1 : 0.3} />
       <pointLight position={[0, 0, 0]} intensity={isDark ? 1.5 : 2} color={isDark ? '#f8f0e3' : '#ffffff'} />
-      
+
       {/* Sun */}
       <mesh position={[0, 0, 0]}>
         <sphereGeometry args={[2, 32, 32]} />
-        <meshStandardMaterial 
-          color={isDark ? '#ff9500' : '#ffcc00'} 
+        <meshStandardMaterial
+          color={isDark ? '#ff9500' : '#ffcc00'}
           emissive={isDark ? '#ff6000' : '#ffcc00'}
           emissiveIntensity={1.5}
         />
       </mesh>
-      
+
       {/* Planets */}
       <OrbitPath radius={4} />
-      <Planet position={[4, 0, 0]} size={0.5} color="#3498db" rotationSpeed={0.02} />
-      
+      <Planet position={[4, 0, 0]} size={0.5} color="#FFC649" rotationSpeed={0.02} />
+
+      {/* Mercury */}
+      <OrbitPath radius={4} />
+      <Planet position={[4, 0, 0]} size={0.5} color="#FF6B6B" rotationSpeed={0.02} /> {/* bright red */}
+
+      {/* Venus */}
       <OrbitPath radius={7} />
-      <Planet position={[7, 0, 0]} size={0.7} color="#e74c3c" rotationSpeed={0.015} />
-      
+      <Planet position={[7, 0, 0]} size={0.7} color="#FFD93D" rotationSpeed={0.015} /> {/* bright yellow */}
+
+      {/* Earth */}
       <OrbitPath radius={10} />
-      <Planet position={[10, 0, 0]} size={0.8} color="#2ecc71" rotationSpeed={0.01} />
-      
+      <Planet position={[10, 0, 0]} size={0.8} color="#4D96FF" rotationSpeed={0.01} /> {/* bright blue */}
+
+      {/* Mars */}
       <OrbitPath radius={14} />
-      <Planet position={[14, 0, 0]} size={1.2} color="#f39c12" rotationSpeed={0.008} />
-      
+      <Planet position={[14, 0, 0]} size={1.2} color="#FF884B" rotationSpeed={0.008} /> {/* orange */}
+
       {/* Asteroid Belt */}
       <AsteroidBelt innerRadius={17} outerRadius={19} />
-      
+
+      {/* Jupiter */}
       <OrbitPath radius={22} />
-      <Planet position={[22, 0, 0]} size={1.0} color="#9b59b6" rotationSpeed={0.005} />
-      
+      <Planet position={[22, 0, 0]} size={1.0} color="#FFB5E8" rotationSpeed={0.005} /> {/* soft pink */}
+
+      {/* Saturn */}
+      <OrbitPath radius={27} />
+      <Planet position={[27, 0, 0]} size={0.9} color="#A0E7E5" rotationSpeed={0.004} /> {/* teal cyan */}
+
+      {/* Uranus */}
+      <OrbitPath radius={32} />
+      <Planet position={[32, 0, 0]} size={0.85} color="#B28DFF" rotationSpeed={0.0035} /> {/* lavender purple */}
+
+      {/* Neptune */}
+      <OrbitPath radius={37} />
+      <Planet position={[37, 0, 0]} size={0.82} color="#00F5D4" rotationSpeed={0.003} /> {/* aqua green */}
+
+
       <Stars radius={100} depth={50} count={isDark ? 5000 : 3000} factor={4} saturation={isDark ? 1 : 0.5} fade speed={1} />
       <OrbitControls enableZoom={true} enablePan={true} enableRotate={true} />
     </>

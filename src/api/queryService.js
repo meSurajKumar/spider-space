@@ -1,10 +1,21 @@
 import api from "./apiService"
 
-export const sendQuery = async (query) => {
+export const sendQuery = async (payload) => {
   try {
-    const response = await api.post("/api/query", { query })
+    // Handle both string and object payloads for backward compatibility
+    const requestPayload = typeof payload === 'string' 
+      ? { query: payload } 
+      : payload
+    
+    console.log('Request payload:', requestPayload)
+      
+    const response = await api.post("/api/v1/botresponse/get-response", requestPayload)
+    console.log('Raw API response:', response)
+    console.log('API response data:', response.data)
+    
     return response.data
   } catch (error) {
+    console.error('API error:', error)
     throw new Error(error.response?.data?.message || "Failed to send query")
   }
 }
