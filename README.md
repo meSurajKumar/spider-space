@@ -32,8 +32,8 @@ A modern, interactive React frontend for a RAG (Retrieval-Augmented Generation) 
 
 ### Prerequisites
 
-- Node.js 16+ and npm
-- RAG chatbot backend running (default: http://localhost:3000)
+- Node.js 22 and npm
+- RAG chatbot backend running (default: http://localhost:5173)
 
 ### Installation
 
