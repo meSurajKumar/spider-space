@@ -6,7 +6,7 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# RAG AI Chatbot Frontend
+# Galactus AI Chatbot Frontend
 
 A modern, interactive React frontend for a RAG (Retrieval-Augmented Generation) chatbot with a stunning 3D solar system background animation built with **React + Vite**.
 
@@ -33,7 +33,7 @@ A modern, interactive React frontend for a RAG (Retrieval-Augmented Generation) 
 ### Prerequisites
 
 - Node.js 16+ and npm
-- RAG chatbot backend running (default: http://localhost:8000)
+- RAG chatbot backend running (default: http://localhost:3000)
 
 ### Installation
 
@@ -49,7 +49,7 @@ npm install three @react-three/fiber @react-three/drei
 \`\`\`bash
 cp .env.example .env
 # Edit .env and set your backend URL:
-# VITE_API_URL=http://localhost:8000
+# VITE_API_URL=http://localhost:3000
 \`\`\`
 
 3. **Start development server:**
@@ -58,7 +58,7 @@ npm run dev
 \`\`\`
 
 4. **Open your browser:**
-Navigate to \`http://localhost:3000\`
+Navigate to \`http://localhost:5173\`
 
 ## 🏗️ Project Structure
 
